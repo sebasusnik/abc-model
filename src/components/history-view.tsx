@@ -208,15 +208,15 @@ export const HistoryView = ({
                 )}
 
                 {/* Action buttons - always visible */}
-                <div className="p-4 pt-2 mt-auto border-t border-slate-700/50 bg-slate-800/30 flex-shrink-0">
-                  <div className="flex gap-1">
+                <div className="p-4 py-3 mt-auto border-t border-slate-700/50 bg-slate-800/30 flex-shrink-0">
+                  <div className="flex gap-2">
                     <Button
-                      onClick={() => handleShare(record)}
-                      variant="whatsapp"
-                      className="text-xs px-2 py-1 flex-1"
+                      onClick={() => handleDelete(record.id.toString())}
+                      variant="danger"
+                      className="text-xs px-2 py-1 flex-1 max-w-12"
                     >
-                      <Send size={12} />
-                      <span className="sm:inline">Compartir</span>
+                      <Trash2 size={12} />
+                      <span className="sr-only sm:inline">Eliminar</span>
                     </Button>
                     <Button
                       onClick={() => handleEdit(record)}
@@ -227,12 +227,12 @@ export const HistoryView = ({
                       <span className="sm:inline">Editar</span>
                     </Button>
                     <Button
-                      onClick={() => handleDelete(record.id.toString())}
-                      variant="danger"
-                      className="text-xs px-2 py-1 flex-1 max-w-12"
+                      onClick={() => handleShare(record)}
+                      variant="whatsapp"
+                      className="text-xs px-2 py-1 flex-1"
                     >
-                      <Trash2 size={12} />
-                      <span className="sr-only sm:inline">Eliminar</span>
+                      <Send size={12} />
+                      <span className="sm:inline">Compartir</span>
                     </Button>
                   </div>
                 </div>
