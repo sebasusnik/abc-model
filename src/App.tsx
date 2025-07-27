@@ -68,7 +68,7 @@ export default function App() {
     }
   }, [records]);
 
-  // Auto-focus first field when step changes and scroll to top smoothly
+  // Auto-focus first field when step changes
   useEffect(() => {
     const firstFieldMap: { [key: number]: string } = {
       1: "a_acontecimiento",
@@ -78,23 +78,32 @@ export default function App() {
       5: "e_creencia",
     };
 
-    // Smooth scroll to top first
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-
-    // Then focus the first field after a short delay to ensure scroll completes
     const firstField = firstFieldMap[step];
     if (firstField) {
-      setTimeout(() => {
+      // Use requestAnimationFrame to ensure DOM is ready
+      requestAnimationFrame(() => {
         const element = document.querySelector(
           `[name="${firstField}"]`
         ) as HTMLTextAreaElement;
         if (element) {
-          element.focus();
+          // Scroll to element smoothly only on desktop
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+          if (!isMobile) {
+            element.scrollIntoView({ 
+              behavior: "smooth", 
+              block: "center" 
+            });
+          } else {
+            // On mobile, just scroll to top without animation
+            window.scrollTo(0, 0);
+          }
+          
+          // Focus after a short delay to ensure scroll completes
+          setTimeout(() => {
+            element.focus();
+          }, isMobile ? 100 : 300);
         }
-      }, 300); // Small delay to ensure smooth scroll completes
+      });
     }
   }, [step]);
 
