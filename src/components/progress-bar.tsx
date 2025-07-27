@@ -56,7 +56,7 @@ export const ProgressBar = ({
               <div key={stepNumber} className="flex items-center flex-shrink-0">
                 <div className="flex flex-col items-center z-10 min-w-[100px] sm:min-w-0 sm:px-4">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${isActive ? "bg-indigo-600 text-white" : "bg-slate-800 border-2 border-slate-700 text-slate-500"}`}
+                    className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-500 ${isActive ? "bg-indigo-600 text-white" : "bg-slate-800 border-2 border-slate-700 text-slate-500"}`}
                   >
                     {step.icon}
                   </div>
