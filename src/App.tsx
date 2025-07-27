@@ -48,6 +48,7 @@ export default function App() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [records, setRecords] = useState<Record[]>([]);
   const [recordToDelete, setRecordToDelete] = useState<number | null>(null);
+  const [editingRecord, setEditingRecord] = useState<Record | null>(null);
 
   useEffect(() => {
     try {
@@ -158,10 +159,30 @@ export default function App() {
   };
 
   const handleSave = () => {
-    setRecords((prev) => [{ ...formData, id: Date.now() }, ...prev]);
+    if (editingRecord) {
+      // Update existing record
+      setRecords((prev) =>
+        prev.map((record) =>
+          record.id === editingRecord.id
+            ? { ...formData, id: editingRecord.id }
+            : record
+        )
+      );
+      setEditingRecord(null);
+    } else {
+      // Create new record
+      setRecords((prev) => [{ ...formData, id: Date.now() }, ...prev]);
+    }
     setFormData(initialFormData);
     setStep(1);
     setView("history");
+  };
+
+  const handleEdit = (record: Record) => {
+    setFormData(record);
+    setEditingRecord(record);
+    setStep(1);
+    setView("form");
   };
 
   const handleDeleteRequest = (id: string) => {
@@ -266,13 +287,18 @@ export default function App() {
           <CardHeader>
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-bold text-slate-50">
-                {view === "form" ? "Registro ABCDE" : "Historial"}
+                {view === "form" 
+                  ? editingRecord 
+                    ? "Editar Registro" 
+                    : "Registro ABCDE" 
+                  : "Historial"}
               </h1>
               <Button
                 onClick={() => {
                   setView((v) => (v === "form" ? "history" : "form"));
                   setStep(1);
                   setFormData(initialFormData);
+                  setEditingRecord(null);
                 }}
                 variant="secondary"
               >
@@ -294,6 +320,7 @@ export default function App() {
                 records={records}
                 handleShare={handleShare}
                 handleDelete={handleDeleteRequest}
+                handleEdit={handleEdit}
                 setView={setView}
               />
             )}

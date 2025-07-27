@@ -1,7 +1,15 @@
-import { BookOpen, PlusCircle, Send, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  BookOpen,
+  ChevronDown,
+  ChevronUp,
+  Edit,
+  PlusCircle,
+  Send,
+  Trash2,
+} from "lucide-react";
+import { useState } from "react";
 import type { FormData } from "../App";
 import { Button } from "./ui/button";
-import { useState } from "react";
 
 type Record = {
   id: number;
@@ -11,14 +19,18 @@ export const HistoryView = ({
   records,
   handleShare,
   handleDelete,
+  handleEdit,
   setView,
 }: {
   records: Record[];
-  handleShare: (record: Record) => void;
+  handleShare: (recordOrMessage: Record | string) => void;
   handleDelete: (id: string) => void;
+  handleEdit: (record: Record) => void;
   setView: (view: string) => void;
 }) => {
-  const [expandedRecords, setExpandedRecords] = useState<Set<number>>(new Set());
+  const [expandedRecords, setExpandedRecords] = useState<Set<number>>(
+    new Set()
+  );
 
   const toggleRecord = (recordId: number) => {
     const newExpanded = new Set(expandedRecords);
@@ -50,40 +62,38 @@ export const HistoryView = ({
         <div className="space-y-4">
           {records.map((record) => {
             const isExpanded = expandedRecords.has(record.id);
-            
+
             return (
               <div
                 key={record.id}
                 className="bg-slate-800/50 rounded-lg flex flex-col min-h-0"
               >
                 {/* Header with acontecimiento and expand button */}
-                <div className="p-4 pb-2">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs text-slate-400 mb-2">
-                        {new Date(record.id).toLocaleString("es-ES")}
+                <div className="p-4 pb-2 relative">
+                  <div >
+                    <p className="text-xs text-slate-400 mb-2">
+                      {new Date(record.id).toLocaleString("es-ES")}
+                    </p>
+                    <div className="space-y-2">
+                      <p className="font-semibold text-indigo-400 text-sm">
+                        A) Acontecimiento Activador
                       </p>
-                      <div className="space-y-2">
-                        <p className="font-semibold text-indigo-400 text-sm">
-                          A) Acontecimiento Activador
-                        </p>
-                        <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
-                          {record.a_acontecimiento}
-                        </p>
-                      </div>
+                      <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                        {record.a_acontecimiento}
+                      </p>
                     </div>
-                    <Button
-                      onClick={() => toggleRecord(record.id)}
-                      variant="secondary"
-                      className="flex-shrink-0 p-1 h-auto text-xs"
-                    >
-                      {isExpanded ? (
-                        <ChevronUp size={16} className="text-slate-400" />
-                      ) : (
-                        <ChevronDown size={16} className="text-slate-400" />
-                      )}
-                    </Button>
                   </div>
+                  <Button
+                    onClick={() => toggleRecord(record.id)}
+                    variant="secondary"
+                    className="absolute top-4 right-4 p-1 h-auto text-xs"
+                  >
+                    {isExpanded ? (
+                      <ChevronUp size={16} className="text-slate-400" />
+                    ) : (
+                      <ChevronDown size={16} className="text-slate-400" />
+                    )}
+                  </Button>
                 </div>
 
                 {/* Expandable content */}
@@ -199,22 +209,30 @@ export const HistoryView = ({
 
                 {/* Action buttons - always visible */}
                 <div className="p-4 pt-2 mt-auto border-t border-slate-700/50 bg-slate-800/30 flex-shrink-0">
-                  <div className="flex gap-2">
+                  <div className="flex gap-1">
                     <Button
                       onClick={() => handleShare(record)}
                       variant="whatsapp"
                       className="text-xs px-2 py-1 flex-1"
                     >
-                      <Send size={14} />
-                      Compartir
+                      <Send size={12} />
+                      <span className="hidden sm:inline">Compartir</span>
+                    </Button>
+                    <Button
+                      onClick={() => handleEdit(record)}
+                      variant="secondary"
+                      className="text-xs px-2 py-1 flex-1"
+                    >
+                      <Edit size={12} />
+                      <span className="hidden sm:inline">Editar</span>
                     </Button>
                     <Button
                       onClick={() => handleDelete(record.id.toString())}
                       variant="danger"
                       className="text-xs px-2 py-1 flex-1"
                     >
-                      <Trash2 size={14} />
-                      Eliminar
+                      <Trash2 size={12} />
+                      <span className="hidden sm:inline">Eliminar</span>
                     </Button>
                   </div>
                 </div>
