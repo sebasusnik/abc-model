@@ -8,7 +8,7 @@ export const Card = ({
   className?: string;
 }) => (
   <div
-    className={`bg-slate-900 w-full max-h-screen sm:max-w-xl mx-auto sm:rounded-xl sm:border border-slate-800 shadow-lg flex flex-col ${className}`}
+    className={`bg-slate-900 w-full sm:max-w-xl mx-auto sm:rounded-xl sm:border border-slate-800 shadow-lg flex flex-col ${className}`}
   >
     {children}
   </div>
@@ -35,7 +35,7 @@ export const CardContent = ({
   children: ReactNode;
   className?: string;
 }) => (
-  <div className={`p-6 flex-1 overflow-y-auto ${className}`}>{children}</div>
+  <div className={`p-6 flex-1 ${className}`}>{children}</div>
 );
 
 export const CardFooter = ({
