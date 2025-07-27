@@ -99,7 +99,7 @@ export const HistoryView = ({
                 {/* Expandable content */}
                 {isExpanded && (
                   <div className="px-4 pb-2">
-                    <div className="space-y-4 text-sm text-slate-300 max-h-[40vh] overflow-y-auto">
+                    <div className="space-y-4 text-sm text-slate-300">
                       {/* Step B */}
                       <div>
                         <p className="font-semibold text-indigo-400 mb-1">
