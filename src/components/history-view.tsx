@@ -35,7 +35,10 @@ export const HistoryView = ({
     ) : (
       <div className="space-y-4">
         {records.map((record) => (
-          <div key={record.id} className="bg-slate-800/50 rounded-lg flex flex-col min-h-0">
+          <div
+            key={record.id}
+            className="bg-slate-800/50 rounded-lg flex flex-col min-h-0"
+          >
             <div className="p-4 pb-2 flex-1 overflow-hidden">
               <p className="text-xs text-slate-400 mb-3">
                 {new Date(record.id).toLocaleString("es-ES")}
@@ -43,70 +46,112 @@ export const HistoryView = ({
               <div className="space-y-4 text-sm text-slate-300 max-h-[40vh] overflow-y-auto">
                 {/* Step A */}
                 <div>
-                  <p className="font-semibold text-indigo-400 mb-1">A) Acontecimiento Activador</p>
-                  <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.a_acontecimiento}</p>
+                  <p className="font-semibold text-indigo-400 mb-1">
+                    A) Acontecimiento Activador
+                  </p>
+                  <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                    {record.a_acontecimiento}
+                  </p>
                 </div>
-                
+
                 {/* Step B */}
                 <div>
-                  <p className="font-semibold text-indigo-400 mb-1">B) Creencias / Pensamientos</p>
-                  <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.b_pensamientos}</p>
+                  <p className="font-semibold text-indigo-400 mb-1">
+                    B) Creencias / Pensamientos
+                  </p>
+                  <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                    {record.b_pensamientos}
+                  </p>
                 </div>
-                
+
                 {/* Step C */}
                 <div>
-                  <p className="font-semibold text-indigo-400 mb-2">C) Consecuencias</p>
+                  <p className="font-semibold text-indigo-400 mb-2">
+                    C) Consecuencias
+                  </p>
                   <div className="space-y-2">
                     {record.c_emocional && (
                       <div>
-                        <p className="text-xs text-slate-400 font-medium">Emocionales:</p>
-                        <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.c_emocional}</p>
+                        <p className="text-xs text-slate-400 font-medium">
+                          Emocionales:
+                        </p>
+                        <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                          {record.c_emocional}
+                        </p>
                       </div>
                     )}
                     {record.c_fisiologico && (
                       <div>
-                        <p className="text-xs text-slate-400 font-medium">Fisiológicas:</p>
-                        <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.c_fisiologico}</p>
+                        <p className="text-xs text-slate-400 font-medium">
+                          Fisiológicas:
+                        </p>
+                        <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                          {record.c_fisiologico}
+                        </p>
                       </div>
                     )}
                     {record.c_conductual && (
                       <div>
-                        <p className="text-xs text-slate-400 font-medium">Conductuales:</p>
-                        <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.c_conductual}</p>
+                        <p className="text-xs text-slate-400 font-medium">
+                          Conductuales:
+                        </p>
+                        <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                          {record.c_conductual}
+                        </p>
                       </div>
                     )}
                   </div>
                 </div>
-                
+
                 {/* Step D */}
                 {record.d_debate && (
                   <div>
-                    <p className="font-semibold text-indigo-400 mb-1">D) Debate de Pensamientos</p>
-                    <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.d_debate}</p>
+                    <p className="font-semibold text-indigo-400 mb-1">
+                      D) Debate de Pensamientos
+                    </p>
+                    <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                      {record.d_debate}
+                    </p>
                   </div>
                 )}
-                
+
                 {/* Step E */}
-                {(record.e_creencia || record.e_emocional || record.e_conductual) && (
+                {(record.e_creencia ||
+                  record.e_emocional ||
+                  record.e_conductual) && (
                   <div>
-                    <p className="font-semibold text-indigo-400 mb-2">E) Nuevos Efectos</p>
+                    <p className="font-semibold text-indigo-400 mb-2">
+                      E) Nuevos Efectos
+                    </p>
                     <div className="space-y-2">
                       {record.e_creencia && (
                         <div>
-                          <p className="text-xs text-slate-400 font-medium">Nueva Creencia:</p>
-                          <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.e_creencia}</p>
+                          <p className="text-xs text-slate-400 font-medium">
+                            Nueva Creencia:
+                          </p>
+                          <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                            {record.e_creencia}
+                          </p>
                         </div>
                       )}
                       {record.e_emocional && (
                         <div>
-                          <p className="text-xs text-slate-400 font-medium">Nuevas Emociones:</p>
-                          <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.e_emocional}</p>
+                          <p className="text-xs text-slate-400 font-medium">
+                            Nuevas Emociones:
+                          </p>
+                          <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                            {record.e_emocional}
+                          </p>
                         </div>
                       )}
                       {record.e_conductual && (
                         <div>
-                          <p className="text-xs text-slate-400 font-medium">Nuevas Conductas:</p>
-                          <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">{record.e_conductual}</p>
+                          <p className="text-xs text-slate-400 font-medium">
+                            Nuevas Conductas:
+                          </p>
+                          <p className="whitespace-pre-wrap text-sm bg-slate-700/30 p-2 rounded">
+                            {record.e_conductual}
+                          </p>
                         </div>
                       )}
                     </div>

@@ -4,7 +4,14 @@ import { Card, CardContent, CardFooter, CardHeader } from "./components/card";
 import { ConfirmationModal } from "./components/confirmation-modal";
 import { HistoryView } from "./components/history-view";
 import { ProgressBar } from "./components/progress-bar";
-import { ReviewStep, StepA, StepB, StepC, StepD, StepE } from "./components/steps";
+import {
+  ReviewStep,
+  StepA,
+  StepB,
+  StepC,
+  StepD,
+  StepE,
+} from "./components/steps";
 import { Button } from "./components/ui/button";
 
 export interface FormData {
@@ -64,23 +71,25 @@ export default function App() {
   useEffect(() => {
     const firstFieldMap: { [key: number]: string } = {
       1: "a_acontecimiento",
-      2: "b_pensamientos", 
+      2: "b_pensamientos",
       3: "c_emocional",
       4: "d_debate",
-      5: "e_creencia"
+      5: "e_creencia",
     };
-    
+
     // Smooth scroll to top first
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
-    
+
     // Then focus the first field after a short delay to ensure scroll completes
     const firstField = firstFieldMap[step];
     if (firstField) {
       setTimeout(() => {
-        const element = document.querySelector(`[name="${firstField}"]`) as HTMLTextAreaElement;
+        const element = document.querySelector(
+          `[name="${firstField}"]`
+        ) as HTMLTextAreaElement;
         if (element) {
           element.focus();
         }
@@ -101,10 +110,10 @@ export default function App() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      
+
       // Get the current field name
       const currentField = e.currentTarget.name;
-      
+
       // Define the field order for each step
       const fieldOrder: { [key: number]: string[] } = {
         1: ["a_acontecimiento"],
@@ -112,22 +121,24 @@ export default function App() {
         3: ["c_emocional", "c_fisiologico", "c_conductual"],
         4: ["d_debate"],
         5: ["e_creencia", "e_emocional", "e_conductual"],
-        6: [] // Review step has no fields
+        6: [], // Review step has no fields
       };
-      
+
       const currentStepFields = fieldOrder[step];
       const currentFieldIndex = currentStepFields.indexOf(currentField);
-      
+
       // If there's a next field in the current step, focus it
       if (currentFieldIndex < currentStepFields.length - 1) {
         const nextField = currentStepFields[currentFieldIndex + 1];
-        const nextElement = document.querySelector(`[name="${nextField}"]`) as HTMLTextAreaElement;
+        const nextElement = document.querySelector(
+          `[name="${nextField}"]`
+        ) as HTMLTextAreaElement;
         if (nextElement) {
           nextElement.focus();
           return;
         }
       }
-      
+
       // If this is the last field in the step, move to next step
       if (currentFieldIndex === currentStepFields.length - 1) {
         if (step < totalSteps) {
@@ -141,7 +152,7 @@ export default function App() {
     const message =
       typeof recordOrMessage === "string"
         ? recordOrMessage
-        : `Hola! Te comparto mi registro ABC del ${new Date(recordOrMessage.id).toLocaleDateString("es-ES")}:\n\n*A) Acontecimiento Activador:*\n${recordOrMessage.a_acontecimiento}\n\n*B) Creencias / Pensamientos:*\n${recordOrMessage.b_pensamientos}\n\n*C) Consecuencias:*\n  - *Emocionales:* ${recordOrMessage.c_emocional}\n  - *Fisiológicas:* ${recordOrMessage.c_fisiologico}\n  - *Conductuales:* ${recordOrMessage.c_conductual}${recordOrMessage.d_debate ? `\n\n*D) Debate de Pensamientos:*\n${recordOrMessage.d_debate}` : ''}${(recordOrMessage.e_creencia || recordOrMessage.e_emocional || recordOrMessage.e_conductual) ? `\n\n*E) Nuevos Efectos:*\n  - *Nueva Creencia:* ${recordOrMessage.e_creencia || 'No especificado'}\n  - *Nuevas Emociones:* ${recordOrMessage.e_emocional || 'No especificado'}\n  - *Nuevas Conductas:* ${recordOrMessage.e_conductual || 'No especificado'}` : ''}`;
+        : `Hola! Te comparto mi registro ABC del ${new Date(recordOrMessage.id).toLocaleDateString("es-ES")}:\n\n*A) Acontecimiento Activador:*\n${recordOrMessage.a_acontecimiento}\n\n*B) Creencias / Pensamientos:*\n${recordOrMessage.b_pensamientos}\n\n*C) Consecuencias:*\n  - *Emocionales:* ${recordOrMessage.c_emocional}\n  - *Fisiológicas:* ${recordOrMessage.c_fisiologico}\n  - *Conductuales:* ${recordOrMessage.c_conductual}${recordOrMessage.d_debate ? `\n\n*D) Debate de Pensamientos:*\n${recordOrMessage.d_debate}` : ""}${recordOrMessage.e_creencia || recordOrMessage.e_emocional || recordOrMessage.e_conductual ? `\n\n*E) Nuevos Efectos:*\n  - *Nueva Creencia:* ${recordOrMessage.e_creencia || "No especificado"}\n  - *Nuevas Emociones:* ${recordOrMessage.e_emocional || "No especificado"}\n  - *Nuevas Conductas:* ${recordOrMessage.e_conductual || "No especificado"}` : ""}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };
@@ -190,15 +201,45 @@ export default function App() {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <StepA data={formData} handleChange={handleChange} handleKeyDown={handleKeyDown} />;
+        return (
+          <StepA
+            data={formData}
+            handleChange={handleChange}
+            handleKeyDown={handleKeyDown}
+          />
+        );
       case 2:
-        return <StepB data={formData} handleChange={handleChange} handleKeyDown={handleKeyDown} />;
+        return (
+          <StepB
+            data={formData}
+            handleChange={handleChange}
+            handleKeyDown={handleKeyDown}
+          />
+        );
       case 3:
-        return <StepC data={formData} handleChange={handleChange} handleKeyDown={handleKeyDown} />;
+        return (
+          <StepC
+            data={formData}
+            handleChange={handleChange}
+            handleKeyDown={handleKeyDown}
+          />
+        );
       case 4:
-        return <StepD data={formData} handleChange={handleChange} handleKeyDown={handleKeyDown} />;
+        return (
+          <StepD
+            data={formData}
+            handleChange={handleChange}
+            handleKeyDown={handleKeyDown}
+          />
+        );
       case 5:
-        return <StepE data={formData} handleChange={handleChange} handleKeyDown={handleKeyDown} />;
+        return (
+          <StepE
+            data={formData}
+            handleChange={handleChange}
+            handleKeyDown={handleKeyDown}
+          />
+        );
       case 6:
         return (
           <ReviewStep
@@ -208,7 +249,13 @@ export default function App() {
           />
         );
       default:
-        return <StepA data={formData} handleChange={handleChange} handleKeyDown={handleKeyDown} />;
+        return (
+          <StepA
+            data={formData}
+            handleChange={handleChange}
+            handleKeyDown={handleKeyDown}
+          />
+        );
     }
   };
 

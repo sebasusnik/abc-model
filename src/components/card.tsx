@@ -21,7 +21,11 @@ export const CardHeader = ({
   children: ReactNode;
   className?: string;
 }) => (
-  <div className={`p-6 border-b border-slate-800 flex-shrink-0 flex flex-col gap-8 ${className}`}>{children}</div>
+  <div
+    className={`p-6 border-b border-slate-800 flex-shrink-0 flex flex-col gap-8 ${className}`}
+  >
+    {children}
+  </div>
 );
 
 export const CardContent = ({
@@ -30,7 +34,9 @@ export const CardContent = ({
 }: {
   children: ReactNode;
   className?: string;
-}) => <div className={`p-6 flex-1 overflow-y-auto ${className}`}>{children}</div>;
+}) => (
+  <div className={`p-6 flex-1 overflow-y-auto ${className}`}>{children}</div>
+);
 
 export const CardFooter = ({
   children,
