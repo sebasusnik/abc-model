@@ -266,7 +266,7 @@ export default function App() {
           <CardHeader>
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-bold text-slate-50">
-                {view === "form" ? "Registro ABC" : "Historial"}
+                {view === "form" ? "Registro ABCDE" : "Historial"}
               </h1>
               <Button
                 onClick={() => {

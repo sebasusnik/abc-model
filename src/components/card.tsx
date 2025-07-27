@@ -8,7 +8,7 @@ export const Card = ({
   className?: string;
 }) => (
   <div
-    className={`bg-slate-900 w-full max-h-screen sm:max-w-md mx-auto sm:rounded-xl sm:border border-slate-800 shadow-lg flex flex-col ${className}`}
+    className={`bg-slate-900 w-full max-h-screen sm:max-w-xl mx-auto sm:rounded-xl sm:border border-slate-800 shadow-lg flex flex-col ${className}`}
   >
     {children}
   </div>
