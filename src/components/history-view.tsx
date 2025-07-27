@@ -216,7 +216,7 @@ export const HistoryView = ({
                       className="text-xs px-2 py-1 flex-1"
                     >
                       <Send size={12} />
-                      <span className="hidden sm:inline">Compartir</span>
+                      <span className="sm:inline">Compartir</span>
                     </Button>
                     <Button
                       onClick={() => handleEdit(record)}
@@ -224,15 +224,15 @@ export const HistoryView = ({
                       className="text-xs px-2 py-1 flex-1"
                     >
                       <Edit size={12} />
-                      <span className="hidden sm:inline">Editar</span>
+                      <span className="sm:inline">Editar</span>
                     </Button>
                     <Button
                       onClick={() => handleDelete(record.id.toString())}
                       variant="danger"
-                      className="text-xs px-2 py-1 flex-1"
+                      className="text-xs px-2 py-1 flex-1 max-w-12"
                     >
                       <Trash2 size={12} />
-                      <span className="hidden sm:inline">Eliminar</span>
+                      <span className="sr-only sm:inline">Eliminar</span>
                     </Button>
                   </div>
                 </div>
